@@ -1,0 +1,13 @@
+---
+
+- name: copy cron files
+  copy:
+    src: k8_access.sh
+    dest: /usr/local/bin/
+
+- cron:
+    name: copy k8 shell script
+    user: "root"
+    minute: "00"
+    hour: "*"
+    job: "/bin/bash /usr/local/bin/k8_access.sh > /dev/null"

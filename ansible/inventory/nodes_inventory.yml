@@ -1,0 +1,4 @@
+---
+node_kubernetes_cluster:
+  hosts:
+    10.116.38.1[0:9]:

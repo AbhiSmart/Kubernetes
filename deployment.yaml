@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nodejs-server
+  labels:
+        k8s-app: nodejs
+spec:
+  replicas: 10 #change to 10
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 3 # 10-3 = 7 pods always available
+  selector:
+      matchLabels:
+        k8s-app: nodejs
+  template:
+    metadata:
+      labels:
+        k8s-app: nodejs  
+    spec:     
+      priorityClassName: : high-priority            
+      containers: 
+      - name: node-server 
+        image: aws_account_id.dkr.ecr.us-west-2.amazonaws.com/nodejs-test:latest
+        ports:
+        - containerPort: 3000
+        resources:
+          limits:
+            cpu: 100m
+            memory: 200Mi
+          requests:
+            cpu: 100m
+            memory: 200Mi

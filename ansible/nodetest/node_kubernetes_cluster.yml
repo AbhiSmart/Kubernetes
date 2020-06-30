@@ -1,0 +1,11 @@
+---
+- name: Deploying Kubernetes Cluser 
+  hosts: node_kubernetes_cluster
+  become: yes
+  gather_facts: true
+  vars:
+    enable_sudo_tty: false
+
+############# Tasks #####################
+  roles:
+    - cron
